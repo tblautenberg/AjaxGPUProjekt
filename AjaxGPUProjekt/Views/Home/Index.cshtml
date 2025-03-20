@@ -1,11 +1,75 @@
-﻿@{
+﻿@model List<Gpu>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div>
     <div>
-        <button>LAV GPU</button>
-        <button>HENT GPU FRA DB</button>
-        <button>SLET GPU FRA DB</button>
+        <form>
+            <div>
+                <div><input name="id" hidden/></div>
+                <div>
+                    <label for="model">Model</label>
+                </div>
+                <div>
+                    <input name="model"/>
+                </div>
+                <div>
+                    <label for="producent">Producent</label>
+                </div>
+                <div>
+                    <input name="producent"/>
+                </div>
+                <div>
+                    <label for="pris">Pris</label>
+                </div>
+                <div>
+                    <input name="pris"/>
+                </div>
+                <div>
+                    <label for="vram">VRam</label>
+                </div>
+                <div>
+                    <input name="vram"/>
+                </div>
+                <div>
+                    <button name="action" type="button" onclick="AjaxPost(this)">Create Gpu!</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <hr />
+
+    <div>
+        @if (Model != null) 
+        {
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Model</th>
+                    <th>Producent</th>
+                    <th>Vram</th>
+                    <th>Pris</th>
+                    <th>Actions</th>
+                </tr>
+            @foreach (Gpu g in Model)
+            {
+                    <tr>
+                        <td id="id">@g.Id</td>
+                        <td id="model">@g.Model</td>
+                        <td id="producent">@g.Producent</td>
+                        <td id="vram">@g.VRam</td>
+                        <td id="pris">@g.Pris</td>
+                        <td>
+                            <button type="button" onclick="AjaxEdit(this)">Edit</button>
+                            /
+                            <button type="button" onclick="AjaxDelete(this)">Delete</button>
+                        </td>
+                    </tr>
+            }
+            </table>
+        }
     </div>
 </div>

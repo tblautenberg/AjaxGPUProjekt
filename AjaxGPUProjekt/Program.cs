@@ -1,7 +1,19 @@
+using AjaxGPUProjekt.Repository;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+//var connectionString = builder.Configuration["connectionstring"];
+builder.Services.AddDbContext<GpuContext>(options =>
+    options.UseMySql(
+        builder.Configuration["ConnectionStrings:DefaultConnection"],
+        ServerVersion.AutoDetect(builder.Configuration["ConnectionStrings:DefaultConnection"])
+    ));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IGpuRepository, GpuRepository>();
 
 var app = builder.Build();
 
