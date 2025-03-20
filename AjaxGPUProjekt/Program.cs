@@ -6,8 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 //var connectionString = builder.Configuration["connectionstring"];
 builder.Services.AddDbContext<GpuContext>(options =>
     options.UseMySql(
-        builder.Configuration["ConnectionStrings:DefaultConnection"],
-        ServerVersion.AutoDetect(builder.Configuration["ConnectionStrings:DefaultConnection"])
+        builder.Configuration["connectionstring"],
+        ServerVersion.AutoDetect(builder.Configuration["connectionstring"])
     ));
 
 // Add services to the container.
